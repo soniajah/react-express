@@ -6,7 +6,7 @@ function App() {
   const [testapi, setTestapi] = useState({ apiResponse: "World", showButton: true })
 
   const getTestApi = () => {
-      fetch("http://localhost:9000/testAPI")
+    fetch("http://localhost:9000/users")
     .then(res => res.text())
     .then((res) => {
       setTestapi({ apiResponse: res, showButton: false })
