@@ -62,8 +62,8 @@ The database has two shcemas, user and workperformance that references user.
       type: Number // integer [0,5]
     }
 
-  # Style
-  For the style react-bootstrap framework is used mostly and some additional css.    
+# Style
+For the style react-bootstrap framework is used mostly and some additional css.    
 
 
 
