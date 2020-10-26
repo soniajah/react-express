@@ -3,20 +3,16 @@ import {useState, useEffect} from 'react';
 import WorkPerformance from './WorkPerformance';
 import WorkPerformanceForm from './WorkPerformanceForm';
 import WorkPerformanceGraph from './WorkPerformanceGraph';
-import { Link } from 'react-router-dom';
 import './UserRecords.css';
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 
-function UserEdit() {
+function UserRecords() {
 
   const [userWorkPerformance, setUserWorkPerformance] = useState([]) 
   const [user, setUser] = useState([]) 
   var urlParts = window.location.href.split('/')
-  var userId = urlParts[urlParts.length - 1]
-
-  useEffect(() => {
-   getUser()
-   updateUserWorkPerformanceList()
-  }, [])
+  var userId = urlParts[urlParts.length - 1] 
 
   const updateUserWorkPerformanceList = () => {
     console.log("http://localhost:9000/work-performance/user/" + userId)
@@ -36,19 +32,46 @@ function UserEdit() {
       console.log(res)
       setUser(res)
     })    
-  };  
+  }; 
+  
+  useEffect(() => {
+    getUser()
+    updateUserWorkPerformanceList()
+   }, [])
 
   return (
     <div className="container">
-      <h1>{user.username} </h1>
-      <Link to={'/user/edit/' + user._id}>Edit</Link>
-      <h1>Add Work Performance</h1>
-      <WorkPerformanceForm  user={user} updateUserWorkPerformanceList={updateUserWorkPerformanceList} />  
-      <h1>Work Performance Records</h1>      
-      <WorkPerformance userWorkPerformance={userWorkPerformance} updateUserWorkPerformanceList={updateUserWorkPerformanceList} />    
-      <WorkPerformanceGraph userWorkPerformance={userWorkPerformance} />
+      <div className="m-5">
+        <h3>{user.username} </h3>
+        <Button href={'/user/edit/' + user._id} className='float-right btn-info'>Edit User</Button>
+      </div>
+      <div className="m-5">
+        <h3 className="mb-3">Add Work Performance</h3>
+        <WorkPerformanceForm  user={user} updateUserWorkPerformanceList={updateUserWorkPerformanceList} />  
+      </div>    
+      <div className="m-5">
+        <h3 className="mb-3">Work Performance Records</h3>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Hours Slept</th>
+              <th>Hours Spent on TV</th>
+              <th>Work Performance</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          <WorkPerformance userWorkPerformance={userWorkPerformance} updateUserWorkPerformanceList={updateUserWorkPerformanceList} />          
+          </tbody>
+        </Table>
+      </div>
+      <div className="m-5">
+        <h3 className="mb-3">Work Performance Records in Grpah</h3>
+        <WorkPerformanceGraph userWorkPerformance={userWorkPerformance} />
+      </div>      
     </div>
   )      
 }
 
-export default UserEdit
+export default UserRecords

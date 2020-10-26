@@ -4,20 +4,27 @@ import * as d3 from 'd3';
 class WorkPerformanceGraph extends React.Component {
  constructor(props){
     super(props);
-    this.myRef = React.createRef(); 
-    console.log(props)
-    this.dataset = [100, 200, 300, 400, 500];
-    this.dataset2 = [100, 200, 300, 400, 200];
+    this.myRef = React.createRef();   
  }
- componentDidMount(){
-    let size = 500;
-    let svg = d3.select(this.myRef.current)
-                .append('svg')
-                .attr('width', size)
-                .attr('height', size);
+
+ componentDidMount() {
+  let size = 500;
+  this.svg = d3.select(this.myRef.current)
+  .append('svg')
+  .attr('width', size)
+  .attr('height', size);
+ }
+
+ componentDidUpdate(){
+   let size = 500;
+   let dataset = [];
+   this.props.userWorkPerformance.forEach(entry => {
+     dataset.push(entry.workPerformance * 100)
+   })
+
     let rect_width = 95;
-    svg.selectAll('rect')
-        .data(this.dataset)
+    this.svg.selectAll('rect')
+        .data(dataset)
         .enter()
         .append('rect')
         .attr('x', (d, i) => 5 + i*(rect_width + 5))

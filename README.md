@@ -5,7 +5,7 @@ A Node.js app implements connects React library with Express framework.
 A simple app that shows user's performance at work based on the hours of sleep, hours spent on TV.
 The backend is written in Express with API that implements CRUD for user and work-performance.
 The frontend is written in React with 3 endpoints that is described in the following: 
-- The homepage includes a list of users with a delete button and a Record link that takes to the selected user's page.
+- The homepage includes a list of clickable users and a delete user button. When clicking the name, it takes to the selected user's page.
   It also includes a user create form.
 - The user records page has a table of all the data relevant to the user. 
   Further down the records are visualised by a multiline chart that is implemented by D3 library.
@@ -62,7 +62,8 @@ The database has two shcemas, user and workperformance that references user.
       type: Number // integer [0,5]
     }
 
-    
+    # Style
+    For the style react-bootstrap framework is used mostly and some additional css.    
 
 
 

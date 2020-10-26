@@ -52,8 +52,8 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
   models.db.workPerformance.deleteOne({ _id: req.body.id })
-  .then((err, result) => {
-    if(err) return console.log(err)
-    res.json({deleted: true}) 
-  })
+  .then(result => {
+    console.log(result);
+    res.status(200).json({message: "Work performance record deleted"});
+  });
 } 

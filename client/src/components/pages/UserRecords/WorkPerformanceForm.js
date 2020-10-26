@@ -1,6 +1,8 @@
 import React from 'react';
 import {useState} from 'react';
-
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
 
 function WorkPerformanceForm({user, updateUserWorkPerformanceList}) {
   const [workPerformance, setworkPerformance] = useState({userId: user._id, 
@@ -10,13 +12,13 @@ function WorkPerformanceForm({user, updateUserWorkPerformanceList}) {
       workPerformance: 3
   }) 
 
-  const handleChange = e => {
+  const workPerformanceChange = e => {
     const value = e.target.value 
     var name = e.target.name
     setworkPerformance({...workPerformance, [name]: value, userId: user._id});
   }  
 
-  const handleSubmit = e => {   
+  const workPerformanceSubmit = e => {   
     fetch("http://localhost:9000/work-performance/create",{
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -32,27 +34,41 @@ function WorkPerformanceForm({user, updateUserWorkPerformanceList}) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input type="hidden" name="userId" value={user._id} />
-        <label>
-          Date *:
-          <input type="date" name="date" value={workPerformance.date} onChange={handleChange} />
-        </label>
-        <label>
-          Hours Slept *:
-          <input type="number" name="hoursSlept" value={workPerformance.hoursSlept} onChange={handleChange} />
-        </label>
-        <label>
-          Hours spent on TV *:
-          <input type="text" name="hoursSpentOnTV" value={workPerformance.horsSpentOnTV} onChange={handleChange} />
-        </label>
-        <label>
-          Work Performance:
-          <input type="number" name="workPerformance" value={workPerformance.workPerformance} onChange={handleChange} />
-        </label>
-        <input type="submit" value="Create Work Performance" />
-      </form>
-      
+      <Form onSubmit={workPerformanceSubmit}>
+        <Form.Row>
+          <Form.Group as={Col} controlId="Date">
+            <Form.Label>Date *</Form.Label>
+            <Form.Control type="date" name="date" value={workPerformance.date} onChange={workPerformanceChange} />
+          </Form.Group>
+
+          <Form.Group as={Col} controlId="hoursSlept">
+            <Form.Label>Hours Slept *</Form.Label>
+            <Form.Control type="number" name="hoursSlept" value={workPerformance.hoursSlept} onChange={workPerformanceChange} />
+          </Form.Group>
+        </Form.Row>
+
+        <Form.Row>
+          <Form.Group as={Col} controlId="Date">
+            <Form.Label>Hours Spent on TV *</Form.Label>
+            <Form.Control type="number" name="hoursSpentOnTV" value={workPerformance.horsSpentOnTV} onChange={workPerformanceChange} />
+          </Form.Group>
+
+          <Form.Group as={Col} controlId="hoursSlept">
+            <Form.Label>Work Performance *</Form.Label>
+            <Form.Control as="select" name="workPerformance" value={workPerformance.workPerformance} onChange={workPerformanceChange}>
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </Form.Control>
+          </Form.Group>
+        </Form.Row>              
+        <Button variant="secondary" type="submit">
+          Submit
+        </Button>
+      </Form>      
     </div>
   )
 }

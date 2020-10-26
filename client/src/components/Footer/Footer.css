@@ -13,23 +13,3 @@
   padding-top: 10px;
   padding-bottom: 50px;
 }
-
-.col-1 {
-  width: 50%;
-  padding: 40px;
-  box-orient: vertical;
-  box-direction: normal;
-  flex-direction: column;
-  box-align: start;
-  align-items: flex-start;
-}
-
-.col-2 {
-  width: 50%;
-  padding: 40px;
-  box-orient: vertical;
-  box-direction: normal;
-  flex-direction: column;
-  box-align: start;
-  align-items: flex-start;
-}

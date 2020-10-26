@@ -1,4 +1,7 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
 
 class CreateUserForm extends React.Component {
   constructor(props) {
@@ -28,13 +31,29 @@ class CreateUserForm extends React.Component {
   }
 
   render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          <input type="text" placeholder="Name" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Create User" />
-      </form>
+
+    return ( 
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Row className="align-items-center">
+          <Col xs="auto">
+            <Form.Label htmlFor="inlineFormInput" srOnly>
+              Username
+            </Form.Label>
+            <Form.Control
+              className="mb-2"
+              id="inlineFormInput"
+              placeholder="Name"
+              value={this.state.value} 
+              onChange={this.handleChange}
+            />
+          </Col>         
+          <Col xs="auto">
+            <Button variant="dark" type="submit" className="mb-2">
+              Add User
+            </Button>
+          </Col>
+        </Form.Row>
+      </Form>  
     );
   }
 }

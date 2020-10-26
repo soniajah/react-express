@@ -1,7 +1,10 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import './UserRecords.css'
+import './UserRecords.css';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
 
 function UserForm() {
  
@@ -10,10 +13,7 @@ function UserForm() {
   var urlParts = window.location.href.split('/')
   var userId = urlParts[urlParts.length - 1]
 
-  useEffect(() => {
-    getUser()
-   }, [])
-
+  
   const handleSubmit = e => {
     updateUser()
     e.preventDefault();   
@@ -31,6 +31,10 @@ function UserForm() {
     })    
   };
 
+  useEffect(() => {
+    getUser()
+   }, [])
+
   const updateUser = () => {
     fetch("http://localhost:9000/user/update",{
       method: 'POST',
@@ -45,16 +49,25 @@ function UserForm() {
   };
 
   return (
-    <div className="container">
-      <h1>{user.username} </h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input type="text" onChange={handleChange} />
-        </label>
-        <input type="submit" value="Update User" />
-      </form> 
-      <Link to={'/user/records/' + user._id}>Records</Link>     
+    <div className="container">         
+      <Form onSubmit={handleSubmit}>
+        <Form.Row className="align-items-center">
+          <Col xs="auto">
+            <Form.Label htmlFor="inlineFormInput" srOnly>
+              Name
+            </Form.Label>
+            <Form.Control type="text" value={user.username} onChange={handleChange} />
+          </Col>         
+          <Col xs="auto">
+            <Button variant="dark" type="submit">
+              Update User
+            </Button>
+          </Col>
+        </Form.Row>
+      </Form> 
+      <div className='m-3'>
+        <Link to={'/user/records/' + user._id}>Records</Link>
+      </div> 
     </div>
   ) 
 }
