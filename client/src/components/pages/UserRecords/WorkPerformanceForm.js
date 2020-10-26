@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 
 
 function WorkPerformanceForm({user, updateUserWorkPerformanceList}) {
@@ -10,28 +10,13 @@ function WorkPerformanceForm({user, updateUserWorkPerformanceList}) {
       workPerformance: 3
   }) 
 
-  // setworkPerformance({userId: props.user._id})
-  // console.log(workPerformance)
-
   const handleChange = e => {
-    const value = e.target.value //.replace(/\+|-/ig, '');
+    const value = e.target.value 
     var name = e.target.name
     setworkPerformance({...workPerformance, [name]: value, userId: user._id});
   }  
 
-  // const magic = e => {
-  //   setworkPerformance({...workPerformance, hoursSlept: workPerformance.hoursSlept + 1});
-  // }
-
-  const handleSubmit = e => {
-    // var workPerformance = {
-    //   userId: userId, 
-    //   date: date, 
-    //   hoursSlept: hoursSlept, 
-    //   hoursOnTV: hoursOnTV,
-    //   workPerformance: workPerformance
-    // }    
-    console.log(workPerformance)
+  const handleSubmit = e => {   
     fetch("http://localhost:9000/work-performance/create",{
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -47,7 +32,6 @@ function WorkPerformanceForm({user, updateUserWorkPerformanceList}) {
 
   return (
     <div>
-      {/* <button onClick={magic}>hello</button> */}
       <form onSubmit={handleSubmit}>
         <input type="hidden" name="userId" value={user._id} />
         <label>

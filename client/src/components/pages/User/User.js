@@ -13,31 +13,15 @@ function User({users, updateUserList}) {
       body: JSON.stringify({id: e.target.value})
     })
     .then(res => {
-      // console.log(res)
-      // alert(res.text());
       updateUserList()
-
     })
     e.preventDefault();
-  }
-
-  const updateUser = (newName, userId) => {
-    fetch("http://localhost:9000/user/update",{
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      mode: 'cors',
-      body: JSON.stringify({name: newName, id: userId})
-    })
-    .then(res => {
-      console.log(res)
-      alert(res.text())
-    })
   }
 
   return users.map((user, index) =>   (
     <div key={index} className='user-row'>
       {user.username}
-      <Link to={'/user/' + user._id} className="">User</Link>
+      <Link to={'/user/records/' + user._id}>Records</Link>
       <button value={user._id} onClick={handleClick} >Delete</button>
     </div>
     )   

@@ -3,10 +3,10 @@ import {useState, useEffect} from 'react';
 import WorkPerformance from './WorkPerformance';
 import WorkPerformanceForm from './WorkPerformanceForm';
 import WorkPerformanceGraph from './WorkPerformanceGraph';
-import UserForm from './UserForm';
-import './UserEdit.css';
+import { Link } from 'react-router-dom';
+import './UserRecords.css';
 
-function UserEdit(props) {
+function UserEdit() {
 
   const [userWorkPerformance, setUserWorkPerformance] = useState([]) 
   const [user, setUser] = useState([]) 
@@ -36,13 +36,12 @@ function UserEdit(props) {
       console.log(res)
       setUser(res)
     })    
-  };
+  };  
 
   return (
     <div className="container">
-      <h1>User - Edit</h1>
-      <p>{user._id}</p>
-      {/* <UserForm  user={user}/>  */}
+      <h1>{user.username} </h1>
+      <Link to={'/user/edit/' + user._id}>Edit</Link>
       <h1>Create Work Performance</h1>
       <WorkPerformanceForm  user={user} updateUserWorkPerformanceList={updateUserWorkPerformanceList} />  
       <h1>User Work Performance Records</h1>      

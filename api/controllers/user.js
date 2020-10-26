@@ -28,13 +28,18 @@ exports.create = (req, res) => {
 }
 
 exports.update = (req, res) => {
-  models.db.user.updateOne({_id: req.body.id}, { $set: { username: req.body.name } }); 
+  console.log(req.body)
+  models.db.user.updateOne({_id: req.body._id}, { $set: { username: req.body.username } })
+  .then((err, result) => {
+    if(err) return console.error(err)
+    res.json({result: result})
+  })   
 }
 
 exports.delete = (req, res) => {
   models.db.user.deleteOne({ _id: req.body.id })
   .then((err, result) => {
-    if(err) return console.log(err)
+    if(err) return console.error(err)
     res.json({deleted: true}) 
   })
 }
