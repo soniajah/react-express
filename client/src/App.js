@@ -1,28 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import './App.css';
+import React from 'react';
+import Navbar from './components/Navbar/Navbar';
+import Footer from './components/Footer/Footer';
+import Home from './components/pages/Home/Home';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import UserEdit from './components/pages/UserEdit/UserEdit';
 
-function App() {
-
-  const [testapi, setTestapi] = useState({ apiResponse: "World", showButton: true })
-
-  const getTestApi = () => {
-    fetch("http://localhost:9000/users")
-    .then(res => res.text())
-    .then((res) => {
-      setTestapi({ apiResponse: res, showButton: false })
-    })    
-  }
-
-  let buttonView
-  if (testapi.showButton) {
-    buttonView = <button onClick={getTestApi}>Click me</button>
-  } else {
-    buttonView = <p>{testapi.apiResponse}</p>
-  }
+function App() {  
   return (
-    <div className="todo-app">
-      <p>Hello</p>
-      {buttonView}
+    <div>      
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/user" component={UserEdit} />
+        </Switch>                
+      </Router> 
+      <Footer /> 
     </div>
   );
 }

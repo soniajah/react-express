@@ -1,3 +1,3 @@
 exports.index = (req, res) => {
-  res.send("HELLO WORLD!!!")
+  res.send("Welcome to user work performance api")
 }

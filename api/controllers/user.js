@@ -4,31 +4,37 @@ exports.all = (req, res) => {
   models.db.user.find({}, function (err, users) {
     if (err) return console.error(err);
     console.log(users);
-    res.json({users: users})
+    res.json(users)
   })
 }
 
-exports.add = (req, res) => {  
-  res.json({})
+exports.get = (req, res) => {
+  models.db.user.findOne({_id: req.params.id}, function (err, user) {
+    if (err) return console.error(err);
+    console.log(user);
+    res.json(user)
+  })  
 }
 
 exports.create = (req, res) => {
-  var newUser = new models.db.user({username: req.body.username, created: Date.now()})
+  console.log("body")
+  console.log(req.body)
+  var newUser = new models.db.user({username: req.body.name, created: Date.now()})
   newUser.save(function (err, result) {
     if (err) return console.error(err);
     console.log(result)
-    res.json({success: true})
+    res.json({created: true})
   });
 }
 
-exports.edit = (req, res) => {
-  res.json({})  
-}
-
 exports.update = (req, res) => {
-  res.json({})  
+  models.db.user.updateOne({_id: req.body.id}, { $set: { username: req.body.name } }); 
 }
 
 exports.delete = (req, res) => {
-  res.json({})  
+  models.db.user.deleteOne({ _id: req.body.id })
+  .then((err, result) => {
+    if(err) return console.log(err)
+    res.json({deleted: true}) 
+  })
 }
