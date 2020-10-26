@@ -42,9 +42,9 @@ function UserEdit() {
     <div className="container">
       <h1>{user.username} </h1>
       <Link to={'/user/edit/' + user._id}>Edit</Link>
-      <h1>Create Work Performance</h1>
+      <h1>Add Work Performance</h1>
       <WorkPerformanceForm  user={user} updateUserWorkPerformanceList={updateUserWorkPerformanceList} />  
-      <h1>User Work Performance Records</h1>      
+      <h1>Work Performance Records</h1>      
       <WorkPerformance userWorkPerformance={userWorkPerformance} updateUserWorkPerformanceList={updateUserWorkPerformanceList} />    
       <WorkPerformanceGraph userWorkPerformance={userWorkPerformance} />
     </div>

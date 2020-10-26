@@ -23,7 +23,6 @@ function Home() {
 
   return (
     <div className="container">
-      <h1>Home</h1>
       <CreateUserForm  updateUserList={updateUserList} />         
       <User users={users} updateUserList={updateUserList} />    
     </div>

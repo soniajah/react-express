@@ -32,8 +32,6 @@ app.post('/work-performance/create', controllers.workPerformance.create);
 app.post('/work-performance/update', controllers.workPerformance.update);
 app.post('/work-performance/delete', controllers.workPerformance.delete);
 
-app.get('/api/test', controllers.api.test.index);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
